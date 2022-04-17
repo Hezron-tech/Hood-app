@@ -21,17 +21,17 @@ class newHoodForm(ModelForm):
         model = Neighborhood
         fields = ('name','location','profile_pic')
         
-# class PostForm(ModelForm):
+class PostForm(ModelForm):
     
-#     class Meta:
-#         model = Post
-#         fields = ['content','image']
+    class Meta:
+        model = Post
+        fields = ['content','image']
         
         
-# class BusinessForm(ModelForm):
-#     class Meta:
-#         model = Business
-#         fields =['name','type','directions','contact']
+class BusinessForm(ModelForm):
+    class Meta:
+        model = Business
+        fields =['name','type','directions','contact']
         
 # class ServiceForm(ModelForm):
     
