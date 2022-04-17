@@ -223,25 +223,25 @@ def school(request):
 
 
 
-# # Register user
-# def register_user(request):
-#     if request.method == 'POST':
-#         form = RegisterUserForm(request.POST)
-#         if form.is_valid():
-#             form.save()
+# Register user
+def register_user(request):
+    if request.method == 'POST':
+        form = RegisterUserForm(request.POST)
+        if form.is_valid():
+            form.save()
 
-#             username = form.cleaned_data['username']
-#             password = form.cleaned_data['password1']
-#             email = form.cleaned_data['email']
-#             user = authenticate(username = username,password=password)
-#             login(request,user)
-#             messages.success(request,('Registration successfull and logged in'))
-#             return redirect('dashboard')
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            email = form.cleaned_data['email']
+            user = authenticate(username = username,password=password)
+            login(request,user)
+            messages.success(request,('Registration successfull and logged in'))
+            return redirect('dashboard')
            
-#     else:
-#         form = RegisterUserForm()
+    else:
+        form = RegisterUserForm()
         
-#     return render(request,'registration/registration_form.html', {'form':form})
+    return render(request,'registration/registration_form.html', {'form':form})
 
 
 
