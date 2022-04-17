@@ -13,17 +13,17 @@ class Neighborhood(models.Model):
     profile_pic = CloudinaryField('image', null=True)
     date_created = models.DateTimeField(auto_now_add=True)
     
-#     def __str__(self):
-#         return self.name
+    def __str__(self):
+        return self.name
     
     
    
-#     def delete_hood(self):
-#         self.delete()
+    def delete_hood(self):
+        self.delete()
 
-#     def update_hood(self,value):
-#         self.name = value
-#         self.save()
+    def update_hood(self,value):
+        self.name = value
+        self.save()
         
 #     @classmethod
 #     def all_hoods(self):
