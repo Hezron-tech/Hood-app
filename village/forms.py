@@ -33,21 +33,21 @@ class BusinessForm(ModelForm):
         model = Business
         fields =['name','type','directions','contact']
         
-# class ServiceForm(ModelForm):
+class ServiceForm(ModelForm):
     
-#     class Meta:
-#         model = Service
-#         fields = ['name', 'description','location']
+    class Meta:
+        model = Service
+        fields = ['name', 'description','location']
 
 
-# class ReviewForm(ModelForm):
-#      class Meta:
-#          model = Review
-#          fields =['content']
+class ReviewForm(ModelForm):
+     class Meta:
+         model = Review
+         fields =['content']
          
         
 # class ProfileForm(ModelForm):
     
 #     class Meta:
 #         model = Profile
-#         fields = ['profile_pic','about']
+        # fields = ['profile_pic','about']
