@@ -1,0 +1,73 @@
+{% extends 'home-base.html' %}
+
+{% block home-content %}
+{% load static %}
+<div class="container">
+<div class="row vh-50">
+              <!-- Modal -->
+              <div class="modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="staticBackdropLabel">New Post</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form data-url ="" method="POST" enctype="multipart/form-data"  id ='bussform'>
+                        {% csrf_token%}
+                        {{form|crispy}}
+                          <input type="submit" class="btn btn-primary btn-sm" >
+                      </form>
+                    
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
+                      <button type="button" class="btn btn-primary">Post</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+    <div class="col-6">
+        <div class="card profile-pic sticky-top">
+        {% if user.profile.profile_pic %}
+        <img src="{{user.profile.profile_pic.url}}" class="img-fluid" alt="">
+        {% else%}
+            <img src="{% static 'profile.png' %}" alt="">
+            <p> defaultphoto</p>
+        {% endif %}
+        </div>
+    </div>
+    <div class="col-6">
+        <h2>{{user.username}}</h2>
+        <i class="fas fa-cog" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><a href="/myprofile/edit"> edit</a></i>
+        {% if user.profile.bio %}
+        <p>{{user.profile.bio}}</p>
+        {% else %}
+        <p>No bio</p>
+        {% endif %}
+    </div>
+</div>
+<hr>
+<div class="row">
+    <h3>Posts</h3>
+    {% for post in posts%}
+    <div class="column">
+        <a href="{% url 'post' post.id %}"style="text-decoration: none">
+            <div class="card ">
+                <div class="card-body">
+                    <div class="image">
+                        <img src="{{ post.screenshot.url}}" alt="" class="">
+                    </div>
+                    </div>
+                <div class="card-footer">
+                    <p class="text-bold fs-4">{{post.content}}</p> 
+
+                </div>
+            
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+</div>
+{% endblock home-content%}
