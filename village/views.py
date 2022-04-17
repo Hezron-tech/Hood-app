@@ -142,26 +142,26 @@ def post(request,post_id):
     post = get_object_or_404(Post,id=post_id)
     return render(request,'post.html')
 
-# # businesses
-# def business(request):
-#     current_user = request.user
-#     hood_group = HoodMember.objects.filter(member=current_user).first()
-#     hood = hood_group.hood
-#     businesses = Business.objects.filter(neighborhood =hood)
-#     if request.method == 'POST':
-#         form = BusinessForm(request.POST)
-#         if form.is_valid():
-#             business = form.save(commit=False)
-#             business.owner = current_user
-#             business.neighborhood = hood
-#             business.save()
-#             new_member = HoodMember(member=current_user,hood=hood)
-#             new_member.save()
-#             messages.success(request,('Business Added!'))
-#             return redirect('business')
-#     else:
-#         form = BusinessForm()
-#     return render(request, 'business.html',{'form':form,'businesses':businesses })
+# businesses
+def business(request):
+    current_user = request.user
+    hood_group = HoodMember.objects.filter(member=current_user).first()
+    hood = hood_group.hood
+    businesses = Business.objects.filter(neighborhood =hood)
+    if request.method == 'POST':
+        form = BusinessForm(request.POST)
+        if form.is_valid():
+            business = form.save(commit=False)
+            business.owner = current_user
+            business.neighborhood = hood
+            business.save()
+            new_member = HoodMember(member=current_user,hood=hood)
+            new_member.save()
+            messages.success(request,('Business Added!'))
+            return redirect('business')
+    else:
+        form = BusinessForm()
+    return render(request, 'business.html',{'form':form,'businesses':businesses })
 
 # # Search business
 # def search_business(request):
