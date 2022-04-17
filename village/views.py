@@ -137,10 +137,10 @@ def create_post(request):
             return JsonResponse({'error': True, 'errors': form.errors},status=400)
    
 
-# # Post and details
-# def post(request,post_id):
-#     post = get_object_or_404(Post,id=post_id)
-#     return render(request,'post.html')
+# Post and details
+def post(request,post_id):
+    post = get_object_or_404(Post,id=post_id)
+    return render(request,'post.html')
 
 # # businesses
 # def business(request):
