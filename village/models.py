@@ -110,16 +110,16 @@ class Business(models.Model):
         businesses = Business.objects.filter(name__icontains=key_word)
         return businesses
     
-# class Service(models.Model):
-#     name = models.CharField(max_length=200)
-#     type = models.CharField(max_length=200)
-#     description = models.TextField()
-#     location = models.CharField(max_length=500,default=None)
-#     Neighborhood = models.ForeignKey(Neighborhood,on_delete=models.CASCADE)
+class Service(models.Model):
+    name = models.CharField(max_length=200)
+    type = models.CharField(max_length=200)
+    description = models.TextField()
+    location = models.CharField(max_length=500,default=None)
+    Neighborhood = models.ForeignKey(Neighborhood,on_delete=models.CASCADE)
 
     
-#     def __str__(self):
-#         return self.name
+    def __str__(self):
+        return self.name
         
 # class Profile(models.Model):
 #     user = models.OneToOneField(User, on_delete=models.CASCADE)
