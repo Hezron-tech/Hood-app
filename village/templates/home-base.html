@@ -1,0 +1,73 @@
+{% extends 'base.html'%}
+{% block content %}
+{% load static%}
+<div class="container-fluid">
+<input type="checkbox" id="check">
+<!--header area start-->
+<header>
+  <label for="check">
+    <i class="fas fa-bars" id="sidebar_btn"></i>
+  </label>
+  <div class="left_area">
+    <h3>the<span>hood</span></h3>
+  </div>
+  <div class="right_area">
+    <form class="" role="search"   action="{% url 'search_business'%}"  >
+        {% csrf_token %}
+        <div class="input-group ">
+                <input type="search" class="form-control" name='search' placeholder="Search business" aria-label="search" aria-describedby="basic-addon1">
+                <div class="input-group-append">
+                    <button class="input-group-text" type="submit" ><i class="fas fa-search"></i></button>
+                </div>
+        </div>
+    </form>
+    <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+          {{user.username}}
+        </a>
+      
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <span><a class="dropdown-item text-primary" href="/myprofile/">Profile</a></span>
+          <span><a class="dropdown-item text-danger" href="accounts/logout/">Logout</a></span>
+        </div>
+    </div>
+  </div>
+</header>
+<!--header area end-->
+<!--mobile navigation bar start-->
+<div class="mobile_nav">
+  <div class="nav_bar">
+    <img src="1.png" class="mobile_profile_image" alt="">
+    <i class="fa fa-bars nav_btn"></i>
+  </div>
+  <div class="mobile_nav_items">
+    
+  <a href="/home"><i class="fas fa-desktop"></i><span>Home</span></a>
+  <a href ="/business"><i class="fas fa-briefcase"></i><span>Business</span></a>
+  <a href="/schools"><i class="fas fa-school"></i><span>Schools</span></a>
+  <a href="/hospitals"><i class="fas fa-hospital"></i><span>Hospitals</span></a>
+  </div>
+</div>
+<!--mobile navigation bar end-->
+<!--sidebar start-->
+<div class="sidebar">
+  <div class="profile_info">
+    <img src="{{ hood.profile_pic.url}}" class="profile_image" alt="">
+    <h4>{{hood.name}}</h4>
+  </div>
+  <a href="/home"><i class="fas fa-desktop"></i><span>Home</span></a>
+  <a href ="/business"><i class="fas fa-briefcase"></i><span>Business</span></a>
+  <a href="/schools"><i class="fas fa-school"></i><span>Schools</span></a>
+  <a href="/hospitals"><i class="fas fa-hospital"></i><span>Hospitals</span></a>
+</div>
+<!--sidebar end-->
+
+<div class="content">
+  {% block home-content%}
+  {% endblock home-content%}
+  
+</div>
+</div>
+      
+
+{% endblock%}

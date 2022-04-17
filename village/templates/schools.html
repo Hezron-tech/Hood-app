@@ -1,0 +1,51 @@
+{% extends 'home-base.html'%}
+{% block home-content %}
+{% load static%}
+{% load crispy_forms_tags %}
+      <div class="heading">
+          <h2>{{hood}}</h2>
+          {{hood.businesses}}
+      </div>
+      {% ifequal creator request.user  %}
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <img src="https://img.icons8.com/material/24/000000/plus-math--v5.png"/>
+        Add school
+      </button>
+      {% endifequal %}
+      <div class="business ">
+          <!-- Modal -->
+            <div class="modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">New school</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <form data-url ="" method="POST" enctype="multipart/form-data"  id ='schoolform'>
+                    {% csrf_token%}
+                    <div class="modal-body">
+                        {{form|crispy}}
+                    </div>
+                      <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% if schools%}
+              {% for school in schools%}
+              <div class="card w-50 m-3 p-3 ">
+                <div class="details">
+                <h2>{{ school}}</h2>
+                {{school.description}}
+                {{school.location}}
+                </div>
+                </div>
+              {% endfor%}
+            {% else %}
+            <p>No schools</p>
+            {% endif %}
+      </div>
+{% endblock home-content%}

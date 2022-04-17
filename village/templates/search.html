@@ -1,0 +1,29 @@
+
+{% extends 'dashboard.html'%}
+{% load static%}
+ {% block dash-content%}
+ {% if hoods %}
+ <div class="card-deck m-3">
+      {% for hood in hoods%}
+      <div class="card text-center " >
+       <div class="card-body" style="background-image: url('{{ hood.profile_pic.url}}'); background-size:cover; height:300px">
+       </div>
+       <div class="card-footer">
+         <h3 class="card-title">{{hood.name}}</h3>
+         <p class="card-text"></p>
+         Created:{{hood.date_created|date:"M d, Y"}}
+         <a href="{% url 'join' hood.id %}"><button class="btn btn-primary"> Join</button></a>
+       </div>
+       
+     </div>
+      {% endfor %}
+   </div>
+    {% else %}
+    <div class="no-hoods">
+       <p>Found 0 hoods in location searched. you can create new</p>
+      
+    </div>
+ </div>
+    {% endif%}
+
+ {% endblock dash-content%}

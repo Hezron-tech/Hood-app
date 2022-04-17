@@ -1,0 +1,51 @@
+{% extends 'home-base.html'%}
+{% block home-content %}
+{% load static%}
+{% load crispy_forms_tags %}
+
+      {% ifequal creator request.user  %}
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <img src="https://img.icons8.com/material/24/000000/plus-math--v5.png"/>
+        Add hospital
+      </button>
+      {% endifequal %}
+      <div class="business ">
+          <!-- Modal -->
+            <div class="modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">New hospital</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form data-url ="" method="POST" enctype="multipart/form-data"  id ='hospitalform'>
+                      {% csrf_token%}
+                      {{form|crispy}}
+                        <input type="submit" class="btn btn-primary btn-sm" >
+                    </form>
+                  
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
+                    <button type="button" class="btn btn-primary">Post</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% if hospitals%}
+            {% for hospital in hospitals%}
+            <div class="card w-50 m-3 p-3 ">
+              <div class="details">
+                <h1>{{hospital}}</h1>
+                <h3 class="text-muted">{{ hospital.location}}</h3> <hr class="divider w-50">
+                {{hospital.type}} <br>
+                <p> {{hospital.description}}  </p>
+              </div>
+            </div>
+            {% endfor%}
+            {% else %}
+            <p>No Hospitals registered</p>
+            {% endif %}
+            </div>
+{% endblock home-content%}

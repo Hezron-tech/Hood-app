@@ -1,0 +1,72 @@
+{%load static %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light height-20vh sticky-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <form class="" role="search"  action="" >
+          {% csrf_token %}
+            <div class="input-group ">
+                  <input type="search" class="form-control" name='search' placeholder="Search Project" aria-label="search" aria-describedby="basic-addon1">
+                  <div class="input-group-append">
+                      <button class="input-group-text" type="submit" ><i class="fas fa-search"></i></button>
+                  </div>
+              </div>
+        </form>   
+      </div>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page">Home</a>
+        </li>
+      </ul>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          {% if user.is_authenticated  %}
+          
+          <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  {% if user.profile.profile_pic%}
+                  <img src="{{user.profile.profile_pic.url}}" alt="" class="icon-profile"> <i>{{user.username}}</i> 
+                  {% else%} 
+                  <img src="{% static 'profile.png' %}" alt="" class="icon-profile">{{user.username}}
+                  {% endif%}
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="/myprofile">Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-danger" href="/accounts/logout/">Logout</a></li>
+              
+            </ul>
+          </li>
+          {% else %}
+            <li class="nav-item">
+                <a class="nav-link " href="/accounts/register/" tabindex="-1" aria-disabled="true">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="/accounts/login/" tabindex="-1" aria-disabled="true">Login</a>
+            </li>
+       
+          {% endif %}
+        </ul>
+        
+      </div>
+      <div class="posting-button">
+        
+      </div>
+    </div>
+  </nav>
+  <div class="header">
+              <div class="header-menu">
+                  <div class="title">Coding <span>Snow</span></div>
+                  <div class="sidebar-btn">
+                      <i class="fas fa-bars"></i>
+                  </div>
+                  <ul>
+                      <li><a href="#"><i class="fas fa-search"></i></a></li>
+                      <li><a href="#"><i class="fas fa-bell"></i></a></li>
+                      <li><a href="#"><i class="fas fa-power-off"></i></a></li>
+                  </ul>
+              </div>
+          </div>

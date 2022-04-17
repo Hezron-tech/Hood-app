@@ -1,0 +1,108 @@
+{% extends 'home-base.html'%}
+{% block home-content %}
+{% load static%}
+{% load crispy_forms_tags %}
+
+<div class="row">
+    <div class="col-lg-9">
+      <div class="posts">
+      <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <img src="https://img.icons8.com/material/24/000000/plus-math--v5.png"/>
+        Create new post
+      </button>
+      <hr>
+          <!-- Modal -->
+            <div class="modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">New Post</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <form action="home/new-post" method="POST" enctype="multipart/form-data"  id ='postform'>
+                    {% csrf_token%}
+                    <div class="modal-body">
+                        {{form|crispy}}
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
+                      <button type="submit" class="btn btn-primary">Post</button>
+                    </div>
+                </form>
+                </div>
+              </div>
+            </div>
+             <!-- Modal ends-->
+            {% if posts%}
+              {% for post in posts %}
+              <div class="post shadow p-3 mb-5 bg-body rounded">
+                <!-- posts -->
+                <div class="poster-icon">
+                  <div class="poster-profile ">
+                    {% if post.author.profile_pic%}
+                    <img src="{{post.author.profile_pic.url}}" class="icon-profile" alt="poster-profile">
+                    {% else %}
+                    <img src=" {% static '/images/profile_pic.png' %} " class="icon-profile" alt="">
+                    {% endif %}
+                    {{post.author}} <span class="text-muted">{{post.date_posted|date:"SHORT_DATE_FORMAT"}}</span>
+                  </div>
+                </div>
+                <div class="post-details ml-5">
+                  
+                  <div class="post-content">{{post.content}}</div>
+                  {% if post.image %}
+                  <div class="post-img w-50">
+                  <img src="{{ post.image.url}}" alt="" class="post-image">
+                  </div>
+                  {% endif %}
+                  <hr>
+                </div>
+              </div>
+              {% endfor %}
+            {% else %}
+              <p>No posts</p>
+            {% endif %}
+      </div>
+    </div>
+    <div class="col-lg-3">
+      <div class="hood-details position-fixed">
+        <div class="card">
+          <div class="card-header"><h3>{{hood.name}} Neighbourhood</h3><i class="fa-solid fa-location-dot">{{ hood.location }}</i></div>
+          <div class="card-body">
+            <p>
+              <span>{{hood.members.count}}</span> members <br>
+              Admin : {{hood.creator}} <br>
+              Created on: {{hood.date_created|date:"M d, Y"}} <br>
+            </p>
+          </div>
+          <div class="card-footer">
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">
+              Leave
+            </button>
+          </div>
+        </div>
+        
+      </div>
+<!-- Delete modal-->
+      <div class="modal" id="delete-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Confirmation</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+             <p> Are you sure you want to leave the neighbourhood?</p>
+             <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <a href="{% url 'Leave'%}"><button class="btn btn-danger">Leave </button></a>
+            </div>
+            
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+{% endblock home-content%}

@@ -1,0 +1,29 @@
+{% extends 'home-base.html'%}
+{% block home-content %}
+{% load static%}
+{% load crispy_forms_tags %}
+
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  <img src="https://img.icons8.com/material/24/000000/plus-math--v5.png"/>
+  Add business
+</button>
+<div class="business ">
+        {% if businesses%}
+        <h4 class="text-center m-3">Found {{businesses.count}} businesses of {{message}}</h4>
+          {% for business in businesses%}
+            <div class="card w-50 m-3 p-3 ">
+              <div class="details">
+                <h1>{{business}}</h1>
+                Owner:{{business.owner}} <br>
+                Type:{{business.type}} <br>
+                Contacts:{{business.contact}}<i class="fa-solid fa-phone-flip"></i> <br>
+                Location:{{business.directions}}
+              </div>
+            </div>
+          {% endfor%}
+        {% else %}
+        <p> Business not found</p>
+        {% endif %}
+ </div>
+{% endblock home-content%}
