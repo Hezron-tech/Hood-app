@@ -163,20 +163,20 @@ def business(request):
         form = BusinessForm()
     return render(request, 'business.html',{'form':form,'businesses':businesses })
 
-# # Search business
-# def search_business(request):
-#     if 'search' in request.GET and request.GET["search"]:
-#         search_term = request.GET.get("search")
-#         print(search_term)
-#         businesses = Business.search_business(search_term)
-#         message = f"{search_term}"
+# Search business
+def search_business(request):
+    if 'search' in request.GET and request.GET["search"]:
+        search_term = request.GET.get("search")
+        print(search_term)
+        businesses = Business.search_business(search_term)
+        message = f"{search_term}"
         
 
-#         return render(request, 'search_business.html',{'businesses':businesses,'message':message})
+        return render(request, 'search_business.html',{'businesses':businesses,'message':message})
 
-#     else:
-#         message = "You haven't searched for any term"
-#         return render(request, 'search.html',{"message":message})
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'search.html',{"message":message})
 # #hospital
 # def hospital(request):
 #     current_user = request.user
