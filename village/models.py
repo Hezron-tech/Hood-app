@@ -25,15 +25,15 @@ class Neighborhood(models.Model):
         self.name = value
         self.save()
         
-#     @classmethod
-#     def all_hoods(self):
-#         hoods = Neighborhood.objects.all()    
-#         return hoods
+    @classmethod
+    def all_hoods(self):
+        hoods = Neighborhood.objects.all()    
+        return hoods
     
-#     @classmethod
-#     def search_hood(self,search_name):
-#         hoods = Neighborhood.objects.filter(location__icontains=search_name) 
-#         return hoods
+    @classmethod
+    def search_hood(self,search_name):
+        hoods = Neighborhood.objects.filter(location__icontains=search_name) 
+        return hoods
     
 
 
