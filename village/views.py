@@ -177,27 +177,27 @@ def search_business(request):
     else:
         message = "You haven't searched for any term"
         return render(request, 'search.html',{"message":message})
-# #hospital
-# def hospital(request):
-#     current_user = request.user
-#     hood_group = HoodMember.objects.filter(member=current_user).first()
-#     hood = hood_group.hood
-#     creator = hood.creator
-#     hospitals = Service.objects.filter(type ='hospital',Neighborhood=hood)
-#     if request.method == 'POST':
-#         form = ServiceForm(request.POST)
-#         if form.is_valid():
-#             service = form.save(commit=False)
-#             service.type = 'hospital'
-#             service.Neighborhood = hood
-#             service.save()
-#             new_member = HoodMember(member=current_user,hood=hood)
-#             new_member.save()
-#             messages.success(request,('Hospital added!'))
-#             return redirect('hospitals')
-#     else:
-#         form = ServiceForm()
-#     return render(request, 'hospitals.html',{'form':form,'hospitals':hospitals, 'creator':creator })
+#hospital
+def hospital(request):
+    current_user = request.user
+    hood_group = HoodMember.objects.filter(member=current_user).first()
+    hood = hood_group.hood
+    creator = hood.creator
+    hospitals = Service.objects.filter(type ='hospital',Neighborhood=hood)
+    if request.method == 'POST':
+        form = ServiceForm(request.POST)
+        if form.is_valid():
+            service = form.save(commit=False)
+            service.type = 'hospital'
+            service.Neighborhood = hood
+            service.save()
+            new_member = HoodMember(member=current_user,hood=hood)
+            new_member.save()
+            messages.success(request,('Hospital added!'))
+            return redirect('hospitals')
+    else:
+        form = ServiceForm()
+    return render(request, 'hospitals.html',{'form':form,'hospitals':hospitals, 'creator':creator })
 
 # #school
 # def school(request):
