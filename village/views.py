@@ -91,18 +91,18 @@ def new_hood(request):
     return render(request,'new-hood.html', {'form':form})
 
 
-# # Join a neighborhood
-# @login_required(login_url='/accounts/login/')
-# def join_hood(request,hood_id):
-#     hood = get_object_or_404(Neighborhood,id=hood_id)
-#     member = HoodMember.objects.filter(Neighborhood =hood,member =request.user)
-#     if member is not None:
-#         new_member = HoodMember(member = request.user, hood= hood)
-#         new_member.save()
-#         messages.success(request,("You've joined the group"))
-#     else:
-#         messages.success(request,("You're already a member"))
-#     return redirect('home')
+# Join a neighborhood
+@login_required(login_url='/accounts/login/')
+def join_hood(request,hood_id):
+    hood = get_object_or_404(Neighborhood,id=hood_id)
+    member = HoodMember.objects.filter(Neighborhood =hood,member =request.user)
+    if member is not None:
+        new_member = HoodMember(member = request.user, hood= hood)
+        new_member.save()
+        messages.success(request,("You've joined the group"))
+    else:
+        messages.success(request,("You're already a member"))
+    return redirect('home')
 
 
 # # Leave neighborhood
