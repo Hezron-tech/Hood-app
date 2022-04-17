@@ -1,0 +1,64 @@
+{% extends 'base.html'%}
+{% block content %}
+{% load static%}
+ <div class="container-fluid m-0 p-0">
+   <header>
+      <div class="left_area">
+        <h3>the<span>hood</span></h3>
+      </div>
+      <div class="right_area">
+        <form class="" role="search"  action="{% url 'search_hood'%}" >
+            {% csrf_token %}
+            <div class="input-group ">
+                    <input type="search" class="form-control" name='search' placeholder="Search by location" aria-label="search" aria-describedby="basic-addon1">
+                    <div class="input-group-append">
+                        <button class="input-group-text" type="submit" ><i class="fas fa-search"></i></button>
+                    </div>
+            </div>
+        </form>
+        <div class="dropdown">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+              {{user.username}}
+            </a>
+          
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <span><a class="dropdown-item text-primary" href="/myprofile/">Profile</a></span>
+              <span><a class="dropdown-item text-danger" href="accounts/logout/">Logout</a></span>
+            </div>
+        </div>
+      </div>
+    </header>
+   {% block dash-content%}
+   <div class="header text-center " style='height: 50px; margin-top: 80px;'>
+      <a href="{% url 'new-hood'%}">  <button class="btn btn-primary m-3"><img src="https://img.icons8.com/material/24/000000/plus-math--v5.png"/>
+       Create New</button></a>
+   </div>
+   <div class="hoods mt-3">
+     {% if hoods%}
+  <div class="card-deck m-3">
+       {% for hood in hoods%}
+       <div class="card text-center " >
+        <div class="card-body" style="background-image: url('{{ hood.profile_pic.url}}'); background-size:cover; height:300px">
+        </div>
+        <div class="card-footer">
+          <h3 class="card-title">{{hood.name}}</h3>
+          <p class="card-text"></p>
+          Location: {{hood.location}} <br>
+          Created:{{hood.date_created|date:"M d, Y"}} <br>
+          <a href="{% url 'join' hood.id %}"><button class="btn btn-primary"> Join</button></a>
+        </div>
+        
+      </div>
+       {% endfor %}
+    </div>
+     {% else %}
+     <div class="no-hoods">
+        <p>There are no hoods at the moment</p>
+       
+     </div>
+  </div>
+     {% endif%}
+    {%endblock %}
+ </div>
+ 
+{% endblock%}
