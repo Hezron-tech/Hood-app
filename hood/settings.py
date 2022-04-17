@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+from pathlib import Path
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -27,6 +32,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+cloudinary.config( 
+    cloud_name = 'degkyymt4',
+    api_key = '227791919185365',
+    api_secret = '8xe14ql2a0O2VQf5kNfAFhQ6dk4'
+    )
+
 
 # Application definition
 
@@ -38,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'village.apps.VillageConfig',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -76,8 +88,10 @@ WSGI_APPLICATION = 'hood.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'hood',
+        'USER': 'hezron',
+    'PASSWORD':'hezzy',
     }
 }
 
