@@ -116,25 +116,25 @@ def leave_hood(request,hood_id):
     
     
     
-# # Creating newpost
-# @login_required(login_url='/accounts/login/')
-# def create_post(request):
-#     if request.method == "POST":
-#         current_user = request.user
-#         hood_group = HoodMember.objects.filter(member=current_user).first()
-#         hood = hood_group.hood
-#         form = PostForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             post = form.save(commit=False)
-#             post.author = current_user
-#             post.neighborhood = hood
-#             post.save()
-#             messages.success(request,('Posted!'))
-#             message='posted successfully'
-#             return redirect('home')
+# Creating newpost
+@login_required(login_url='/accounts/login/')
+def create_post(request):
+    if request.method == "POST":
+        current_user = request.user
+        hood_group = HoodMember.objects.filter(member=current_user).first()
+        hood = hood_group.hood
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = current_user
+            post.neighborhood = hood
+            post.save()
+            messages.success(request,('Posted!'))
+            message='posted successfully'
+            return redirect('home')
     
-#         else:
-#             return JsonResponse({'error': True, 'errors': form.errors},status=400)
+        else:
+            return JsonResponse({'error': True, 'errors': form.errors},status=400)
    
 
 # # Post and details
