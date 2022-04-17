@@ -46,8 +46,8 @@ class ReviewForm(ModelForm):
          fields =['content']
          
         
-# class ProfileForm(ModelForm):
+class ProfileForm(ModelForm):
     
-#     class Meta:
-#         model = Profile
-        # fields = ['profile_pic','about']
+    class Meta:
+        model = Profile
+        fields = ['profile_pic','about']
