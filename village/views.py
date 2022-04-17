@@ -255,20 +255,20 @@ def user_profile(request,username):
     return render(request, 'profiles/userprofile.html', {'profile':profile,'posts':posts})
 
 
-# #logged in user profile
-# @login_required(login_url='/accounts/login/')
-# def my_profile(request):
-#     user = request.user
-#     profile = get_object_or_404(Profile,user=user)
-#     if request ==' POST':
-#         form = ProfileForm(request.POST, request.FILES, instance=profile)
-#         if form.is_valid():
-#             profileform = form.save(commit=False)
-#             profileform.user = user
-#             profileform.save()
-#             messages.success(request,('Update saved'))
-#         return redirect('my_profile')
-#     else:
-#         posts = Post.objects.filter(author=user) 
-#         form = ProfileForm() 
-#         return render(request, 'profiles/profile.html', {'user': user,'posts':posts,'form':form})
+#logged in user profile
+@login_required(login_url='/accounts/login/')
+def my_profile(request):
+    user = request.user
+    profile = get_object_or_404(Profile,user=user)
+    if request ==' POST':
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            profileform = form.save(commit=False)
+            profileform.user = user
+            profileform.save()
+            messages.success(request,('Update saved'))
+        return redirect('my_profile')
+    else:
+        posts = Post.objects.filter(author=user) 
+        form = ProfileForm() 
+        return render(request, 'profiles/profile.html', {'user': user,'posts':posts,'form':form})
