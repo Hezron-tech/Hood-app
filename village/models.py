@@ -53,29 +53,29 @@ class Post(models.Model):
     neighborhood = models.ForeignKey(Neighborhood,related_name='hoodposts',on_delete=models.CASCADE)
     
     
-#     def __str__(self):
-#         return self.content
+    def __str__(self):
+        return self.content
     
-#     def save_post(self):
-#         self.save()
+    def save_post(self):
+        self.save()
         
-#     def delete_post(self):
-#         self.delete()
+    def delete_post(self):
+        self.delete()
         
-#     def edit_post(self,new_content):
-#         self.content = new_content
-#         self.save()
+    def edit_post(self,new_content):
+        self.content = new_content
+        self.save()
     
         
-#     @classmethod    
-#     def get_posts(self):
-#         posts = Post.objects.all()
-#         return posts
+    @classmethod    
+    def get_posts(self):
+        posts = Post.objects.all()
+        return posts
     
-#     @classmethod    
-#     def search_post(self, search_title):
-#         posts= Post.objects.filter(title__icontains=search_title)
-#         return posts
+    @classmethod    
+    def search_post(self, search_title):
+        posts= Post.objects.filter(title__icontains=search_title)
+        return posts
 
 
 
