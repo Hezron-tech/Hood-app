@@ -140,11 +140,11 @@ class Profile(models.Model):
         instance.profile.save()
         
         
-# class Review(models.Model):
-#     content = models.TextField(max_length=200)
-#     author = models.ForeignKey(User, on_delete=models.CASCADE)
-#     business = models.ForeignKey(Business, on_delete=models.CASCADE)
+class Review(models.Model):
+    content = models.TextField(max_length=200)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    business = models.ForeignKey(Business, on_delete=models.CASCADE)
     
     
-#     def __str__(self):
-#         return 'Review by {}'.format(self.author)
+    def __str__(self):
+        return 'Review by {}'.format(self.author)
