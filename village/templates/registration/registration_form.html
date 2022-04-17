@@ -1,0 +1,32 @@
+{% extends 'base.html'%}
+{% block content %}
+{%load crispy_forms_tags %} 
+<div class="container-fluid" style = "background-color:#dce6f5; margin-bottom:50px;">
+    <header>
+        <div class="left_area">
+          <h3>the<span>hood</span></h3>
+        </div>
+        <div class="right_area">
+          <div class="nav-links">
+            <a href="/accounts/login/"> <span class=" acc">Login</span></a>/
+            <a href="/admin/"><span class="acc">Switch to admin </span></a>
+        
+          </div>
+        </div>
+      </header>
+      <!--header area end-->
+    <div class="text-center mt-5 pt-5"> <h2 style="font-size :38px; font: weight 800px; margin-top: 30px">Sign Up</h2></div>
+    <hr class=" m-auto w-50">
+    <div class="postform w-50 mt-3 m-auto shadow p-3 mb-5 bg-body rounded">
+        <form action="" method='POST' enctype="multipart/form-data" >
+            {% csrf_token%}
+            {{form|crispy}}
+            <div class="form-group m-3">
+                <input type="submit" class="btn btn-primary" value="Sign Up" >
+            </div>
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}
