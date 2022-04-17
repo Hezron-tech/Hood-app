@@ -37,13 +37,13 @@ class Neighborhood(models.Model):
     
 
 
-# class HoodMember(models.Model):
-#     member = models.ForeignKey(User,on_delete=models.CASCADE)
-#     hood = models.ForeignKey(Neighborhood, related_name='members',on_delete=models.CASCADE)
+class HoodMember(models.Model):
+    member = models.ForeignKey(User,on_delete=models.CASCADE)
+    hood = models.ForeignKey(Neighborhood, related_name='members',on_delete=models.CASCADE)
     
     
-#     def __str__(self):
-#         return '{} in {}'.format(self.member, self.hood)
+    def __str__(self):
+        return '{} in {}'.format(self.member, self.hood)
     
 # class Post(models.Model):
 #     image = CloudinaryField('image', null=True,blank =True)
