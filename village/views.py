@@ -245,14 +245,14 @@ def register_user(request):
 
 
 
-# # Page for profile
-# def user_profile(request,username):
-#     user = User.objects.filter(username=username).first()
-#     if user == request.user:
-#         return redirect('my_profile')
-#     profile = Profile.objects.filter(user=user).first()
-#     posts = Post.objects.filter(author=user)
-#     return render(request, 'profiles/userprofile.html', {'profile':profile,'posts':posts})
+# Page for profile
+def user_profile(request,username):
+    user = User.objects.filter(username=username).first()
+    if user == request.user:
+        return redirect('my_profile')
+    profile = Profile.objects.filter(user=user).first()
+    posts = Post.objects.filter(author=user)
+    return render(request, 'profiles/userprofile.html', {'profile':profile,'posts':posts})
 
 
 # #logged in user profile
