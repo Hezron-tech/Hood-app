@@ -72,23 +72,23 @@ def home(request):
     
     
 
-# # Creating new Neighborhood
-# @login_required(login_url='/accounts/login/')
-# def new_hood(request):
-#     if request.method == 'POST':
-#         current_user = request.user
-#         form = newHoodForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             hood = form.save(commit=False)
-#             hood.creator = current_user
-#             hood.save()
-#             new_member = HoodMember(member=current_user,hood=hood)
-#             new_member.save()
-#             messages.success(request,('Neighborhood created!'))
-#             return redirect('dashboard')
-#     else:
-#         form = newHoodForm()
-#     return render(request,'new-hood.html', {'form':form})
+# Creating new Neighborhood
+@login_required(login_url='/accounts/login/')
+def new_hood(request):
+    if request.method == 'POST':
+        current_user = request.user
+        form = newHoodForm(request.POST, request.FILES)
+        if form.is_valid():
+            hood = form.save(commit=False)
+            hood.creator = current_user
+            hood.save()
+            new_member = HoodMember(member=current_user,hood=hood)
+            new_member.save()
+            messages.success(request,('Neighborhood created!'))
+            return redirect('dashboard')
+    else:
+        form = newHoodForm()
+    return render(request,'new-hood.html', {'form':form})
 
 
 # # Join a neighborhood
