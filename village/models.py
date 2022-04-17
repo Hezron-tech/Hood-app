@@ -45,12 +45,12 @@ class HoodMember(models.Model):
     def __str__(self):
         return '{} in {}'.format(self.member, self.hood)
     
-# class Post(models.Model):
-#     image = CloudinaryField('image', null=True,blank =True)
-#     content = models.TextField( max_length=500)
-#     author = models.ForeignKey(User,related_name='posts', on_delete=models.CASCADE)
-#     date_posted = models.DateTimeField(auto_now_add=True)
-#     neighborhood = models.ForeignKey(Neighborhood,related_name='hoodposts',on_delete=models.CASCADE)
+class Post(models.Model):
+    image = CloudinaryField('image', null=True,blank =True)
+    content = models.TextField( max_length=500)
+    author = models.ForeignKey(User,related_name='posts', on_delete=models.CASCADE)
+    date_posted = models.DateTimeField(auto_now_add=True)
+    neighborhood = models.ForeignKey(Neighborhood,related_name='hoodposts',on_delete=models.CASCADE)
     
     
 #     def __str__(self):
