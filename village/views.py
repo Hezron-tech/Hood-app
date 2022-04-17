@@ -40,35 +40,35 @@ def search_hood(request):
         message = "You haven't searched for any term"
         return render(request, 'search.html',{"message":message})
 
-# # Home posts and details
-# @login_required(login_url='/accounts/login/')
-# def home(request):
-#     current_user = request.user
-#     if request.method == "POST":
-#         hood_group = HoodMember.objects.filter(member=current_user).first()
-#         hood = hood_group.hood
-#         form = PostForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             post = form.save(commit=False)
-#             post.author = current_user
-#             post.neighborhood = hood
-#             post.save()
-#             messages.success(request,('Posted!'))
-#             return redirect('home')
-#     else:
-#         hood_group = HoodMember.objects.filter(member=current_user).first()
-#         if hood_group is not None:
-#             hood = hood_group.hood
-#             posts =Post.objects.filter(neighborhood =hood)
-#             form = PostForm()
-#             context = {
-#                 'hood':hood,
-#                 'posts':posts,
-#                 'form':form,
-#             }
-#             return render(request,'home.html', context)
-#         else:
-#             return redirect('dashboard')
+# Home posts and details
+@login_required(login_url='/accounts/login/')
+def home(request):
+    current_user = request.user
+    if request.method == "POST":
+        hood_group = HoodMember.objects.filter(member=current_user).first()
+        hood = hood_group.hood
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = current_user
+            post.neighborhood = hood
+            post.save()
+            messages.success(request,('Posted!'))
+            return redirect('home')
+    else:
+        hood_group = HoodMember.objects.filter(member=current_user).first()
+        if hood_group is not None:
+            hood = hood_group.hood
+            posts =Post.objects.filter(neighborhood =hood)
+            form = PostForm()
+            context = {
+                'hood':hood,
+                'posts':posts,
+                'form':form,
+            }
+            return render(request,'home.html', context)
+        else:
+            return redirect('dashboard')
     
     
 
