@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'village.apps.VillageConfig',
     'cloudinary',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [

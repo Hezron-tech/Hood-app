@@ -92,28 +92,23 @@ def new_hood(request):
 
 
 # Join a neighborhood
+
 @login_required(login_url='/accounts/login/')
-def join_hood(request,hood_id):
-    hood = get_object_or_404(Neighborhood,id=hood_id)
-    member = HoodMember.objects.filter(Neighborhood =hood,member =request.user)
-    if member is not None:
-        new_member = HoodMember(member = request.user, hood= hood)
-        new_member.save()
-        messages.success(request,("You've joined the group"))
-    else:
-        messages.success(request,("You're already a member"))
+def join_hood(request, hood_id):
+    neighbourhood = get_object_or_404(Neighborhood, id=hood_id)
+    request.user.profile.neighbourhood = neighbourhood
+    request.user.profile.save()
     return redirect('home')
-
-
-# Leave neighborhood
-@login_required(login_url='/accounts/login/')
 def leave_hood(request,hood_id):
     current_user = request.user
-    hood = get_object_or_404(Neighborhood,id=hood_id)
-    membership = HoodMember(member = current_user, hood= hood)
-    membership.delete()
+    hood = get_object_or_404(Neighborhood, id=hood_id)
+    hood_member = HoodMember.objects.filter(member=current_user).first()
+    hood_member.delete()
     return redirect('dashboard')
-    
+
+    # request.user.profile.save()
+    # return redirect('dashboard')
+   
     
     
 # Creating newpost
@@ -199,7 +194,7 @@ def hospital(request):
         form = ServiceForm()
     return render(request, 'hospitals.html',{'form':form,'hospitals':hospitals, 'creator':creator })
 
-# #school
+#school
 def school(request):
     current_user = request.user
     hood_group = HoodMember.objects.filter(member=current_user).first()

@@ -2,6 +2,7 @@
 
 {% block home-content %}
 {% load static %}
+{% load crispy_forms_tags %}
 <div class="container">
 <div class="row vh-50">
               <!-- Modal -->
@@ -16,6 +17,8 @@
                       <form data-url ="" method="POST" enctype="multipart/form-data"  id ='bussform'>
                         {% csrf_token%}
                         {{form|crispy}}
+                      
+                       
                           <input type="submit" class="btn btn-primary btn-sm" >
                       </form>
                     
