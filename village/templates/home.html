@@ -95,7 +95,7 @@
              <p> Are you sure you want to leave the neighbourhood?</p>
              <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-              <a href="{% url 'Leave'%}"><button class="btn btn-danger">Leave </button></a>
+              <a href="{% url 'leave' hood.id%}"><button class="btn btn-danger">Leave{{hood.id}}</button></a>
             </div>
             
             </div>
